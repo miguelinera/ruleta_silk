@@ -3,42 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Silk — Ruleta Probabilística</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Silk — Ruleta Oficial de Barrio</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root { --silk-blue: #4D7CF5; --silk-dark: #0A1628; --silk-gold: #F5A623; --silk-white: #FFFFFF; --silk-red: #ff4d4d; }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'DM Sans',sans-serif; background:var(--silk-dark); color:var(--silk-white); min-height:100dvh; display:flex; flex-direction:column; align-items:center; }
-  .app { width:100%; max-width:420px; padding:40px 20px; text-align:center; }
-  .brand-name { font-family:'Anton',sans-serif; font-size:32px; letter-spacing:4px; margin-bottom:20px; color:var(--silk-white); }
-  .roulette-container { position:relative; width:300px; height:300px; margin:0 auto 30px; }
-  .pointer { position:absolute; top:-20px; left:50%; transform:translateX(-50%); z-index:10; width:0; height:0; border-left:15px solid transparent; border-right:15px solid transparent; border-top:30px solid var(--silk-gold); }
-  .wheel { width:100%; height:100%; border-radius:50%; transition: transform 5s cubic-bezier(0.15, 0, 0.15, 1); border: 5px solid rgba(255,255,255,0.1); }
-  .spin-btn { width:100%; max-width:280px; padding:18px; border:none; border-radius:16px; background:linear-gradient(135deg,var(--silk-blue),#3A5FD9); color:white; font-family:'Anton',sans-serif; font-size:22px; cursor:pointer; }
-  .spin-btn:disabled { opacity:0.5; }
-  /* Modal sencillo */
-  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); display:none; align-items:center; justify-content:center; z-index:100; }
-  .modal-overlay.active { display:flex; }
-  .modal { background:#142044; padding:40px; border-radius:24px; border:1px solid var(--silk-blue); }
-  .modal-points { font-family:'Anton',sans-serif; font-size:60px; color:var(--silk-gold); }
+  :root { 
+    --silk-blue: #3365FF;    /* Silk Blue: Tecnología y confianza */
+    --silk-dark: #111111;    /* Silk Black: Sobriedad urbana */
+    --silk-white: #F5F5F2;   /* Silk White: Blanco cálido de barrio */
+    --silk-orange: #E8744A;  /* Silk Orange: Humano y cercano */
+    --silk-sky: #65DFFE;     /* Silk Sky: Energía y claridad */
+    --silk-deep: #243A8F;    /* Silk Deep Blue: Carácter nocturno */
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  
+  body { 
+    font-family:'Inter', sans-serif; 
+    background-color: var(--silk-dark); 
+    color: var(--silk-white); 
+    min-height: 100dvh; 
+    display: flex; flex-direction: column; align-items: center; 
+  }
+
+  .app { width: 100%; max-width: 420px; padding: 40px 20px; text-align: center; }
+
+  /* Estilo de Marca: Directo y sin artificios */
+  .brand-name { 
+    font-family: 'Anton', sans-serif; 
+    font-size: 42px; 
+    letter-spacing: 1px; 
+    margin-bottom: 5px; 
+    color: var(--silk-blue); 
+    text-transform: uppercase;
+  }
+  
+  .tagline {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+  }
+
+  .roulette-container { 
+    position: relative; 
+    width: 320px; height: 320px; 
+    margin: 0 auto 40px; 
+    border: 8px solid var(--silk-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(51, 101, 255, 0.2);
+  }
+
+  .pointer { 
+    position: absolute; top: -15px; left: 50%; 
+    transform: translateX(-50%); z-index: 10; 
+    width: 0; height: 0; 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent; 
+    border-top: 35px solid var(--silk-orange); 
+  }
+
+  .wheel { width: 100%; height: 100%; border-radius: 50%; transition: transform 5s cubic-bezier(0.15, 0, 0.15, 1); }
+
+  .spin-btn { 
+    width: 100%; max-width: 280px; padding: 20px; 
+    border: none; border-radius: 4px; /* Menos redondeado, más urbano/robusto */
+    background-color: var(--silk-blue); 
+    color: white; 
+    font-family: 'Anton', sans-serif; 
+    font-size: 24px; cursor: pointer; 
+    transition: transform 0.2s;
+  }
+  
+  .spin-btn:active { transform: scale(0.98); }
+  .spin-btn:disabled { background-color: #444; cursor: not-allowed; }
+
+  /* Modal con estética analógica/documental */
+  .modal-overlay { 
+    position: fixed; inset: 0; 
+    background: rgba(17, 17, 17, 0.98); 
+    display: none; align-items: center; justify-content: center; z-index: 100; 
+  }
+  .modal-overlay.active { display: flex; }
+  .modal { 
+    background: var(--silk-white); 
+    color: var(--silk-dark);
+    padding: 50px 30px; border-radius: 2px; 
+    width: 85%; text-align: center;
+  }
+  .modal-points { font-family: 'Anton', sans-serif; font-size: 80px; color: var(--silk-blue); line-height: 1; }
 </style>
 </head>
 <body>
 
 <div class="app">
-  <div class="brand-name">SILK PREMIUM</div>
+  <div class="brand-name">SILK</div>
+  <div class="tagline">TU BARRIO, MEJOR.</div>
+  
   <div class="roulette-container">
     <div class="pointer"></div>
-    <canvas id="wheelCanvas" width="300" height="300" class="wheel"></canvas>
+    <canvas id="wheelCanvas" width="320" height="320" class="wheel"></canvas>
   </div>
-  <button id="spinBtn" class="spin-btn">¡PROBAR SUERTE!</button>
+
+  <button id="spinBtn" class="spin-btn">PROBAR SUERTE</button>
 </div>
 
 <div id="modalOverlay" class="modal-overlay">
   <div class="modal">
-    <div style="font-family:'Anton'; color:white">¡GANASTE!</div>
+    <div style="font-family:'Anton'; font-size:24px; text-transform:uppercase;">¡Has ganado!</div>
     <div id="modalPoints" class="modal-points">0</div>
-    <button onclick="closeModal()" class="spin-btn" style="font-size:14px;">CONTINUAR</button>
+    <div style="margin-bottom:30px; font-weight:700; letter-spacing:1px;">PUNTOS SILK</div>
+    <button onclick="closeModal()" class="spin-btn" style="font-size:16px; padding:15px;">VOLVER AL BARRIO</button>
   </div>
 </div>
 
@@ -47,12 +121,12 @@
   const ctx = canvas.getContext('2d');
   const btn = document.getElementById('spinBtn');
   
-  // Definición de sectores con sus probabilidades
+  // Configuración con paleta oficial de Silk
   const prizes = [
-    { label: '25', prob: 0.40, color: '#4D7CF5' },   // 40%
-    { label: '50', prob: 0.30, color: '#0A1628' },   // 30%
-    { label: '75', prob: 0.29, color: '#2a3a5a' },   // 29%
-    { label: '5000', prob: 0.01, color: '#F5A623' }  // 1%
+    { label: '25', prob: 0.40, color: '#3365FF' },   // Silk Blue
+    { label: '50', prob: 0.30, color: '#243A8F' },   // Silk Deep Blue
+    { label: '75', prob: 0.29, color: '#65DFFE' },   // Silk Sky
+    { label: '5000', prob: 0.01, color: '#E8744A' }  // Silk Orange (Acento)
   ];
 
   let currentRotation = 0;
@@ -62,20 +136,18 @@
     prizes.forEach(prize => {
       const sliceAngle = 2 * Math.PI * prize.prob;
       ctx.beginPath();
-      ctx.moveTo(150, 150);
-      ctx.arc(150, 150, 150, startAngle, startAngle + sliceAngle);
+      ctx.moveTo(160, 160);
+      ctx.arc(160, 160, 160, startAngle, startAngle + sliceAngle);
       ctx.fillStyle = prize.color;
       ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,0.2)";
-      ctx.stroke();
 
-      // Texto
+      // Texto en Anton
       ctx.save();
-      ctx.translate(150, 150);
+      ctx.translate(160, 160);
       ctx.rotate(startAngle + sliceAngle / 2);
-      ctx.fillStyle = "white";
-      ctx.font = "bold 18px Anton";
-      ctx.fillText(prize.label, 70, 5);
+      ctx.fillStyle = prize.label === '75' ? '#111111' : 'white';
+      ctx.font = "bold 22px Anton";
+      ctx.fillText(prize.label, 85, 8);
       ctx.restore();
 
       startAngle += sliceAngle;
@@ -84,30 +156,20 @@
 
   btn.addEventListener('click', () => {
     btn.disabled = true;
-    
-    // 1. Decidir el ganador según probabilidad
     const rand = Math.random();
     let cumulativeProb = 0;
     let winnerIndex = 0;
 
     for (let i = 0; i < prizes.length; i++) {
       cumulativeProb += prizes[i].prob;
-      if (rand <= cumulativeProb) {
-        winnerIndex = i;
-        break;
-      }
+      if (rand <= cumulativeProb) { winnerIndex = i; break; }
     }
 
-    // 2. Calcular ángulo para que caiga en ese sector
     let startAngleDeg = 0;
-    for (let i = 0; i < winnerIndex; i++) {
-      startAngleDeg += prizes[i].prob * 360;
-    }
+    for (let i = 0; i < winnerIndex; i++) { startAngleDeg += prizes[i].prob * 360; }
     const sectorSizeDeg = prizes[winnerIndex].prob * 360;
     const targetDegInSector = Math.random() * sectorSizeDeg;
     
-    // El "punto 0" de la ruleta está a la derecha (3 en reloj), el puntero arriba (12).
-    // Ajustamos 90 grados y calculamos la rotación final.
     const finalDegree = (360 - (startAngleDeg + targetDegInSector + 90) % 360);
     const totalRotation = currentRotation + 3600 + finalDegree; 
     
